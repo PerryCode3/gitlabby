@@ -25,9 +25,6 @@ This project demonstrates:
 
 # gitlabby
 
-[![Pipeline Status](https://img.shields.io/badge/pipeline-passed-brightgreen?style=for-the-badge&logo=gitlab)](#)
-[![Quality Gate](https://img.shields.io/badge/quality--gate-passed-brightgreen?style=for-the-badge&logo=sonarqube)](#)
-
 [![Pipeline Status](https://img.shields.io/badge/pipeline-passed-brightgreen?style=for-the-badge&logo=gitlab)](http://localhost/root/gitlabby/-/pipelines)
 [![Quality Gate](https://img.shields.io/badge/quality--gate-passed-brightgreen?style=for-the-badge&logo=sonarqube)](http://localhost:9000/dashboard?id=gitlabby)
 
