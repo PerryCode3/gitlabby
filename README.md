@@ -23,6 +23,14 @@ This project demonstrates:
 | 🔍 **Analyze** | Scan code quality and security with SonarQube. |
 | 🚢 **Deploy** | (Coming soon!) Deploy to containerized or cloud environments. |
 
+# gitlabby
+
+[![pipeline status](http://localhost/root/gitlabby/badges/main/pipeline.svg)](http://localhost/root/gitlabby/-/pipelines)
+[![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=gitlabby&metric=alert_status)](http://localhost:9000/dashboard?id=gitlabby)
+
+A secure CI/CD lab project integrating GitLab, Docker, and SonarQube.
+
+
 ---
 
 ## 🖇️ Architecture Flow
