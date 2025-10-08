@@ -64,8 +64,20 @@ mirror_to_github:
     - git checkout "$CI_COMMIT_REF_NAME"
     - git push --follow-tags github "$CI_COMMIT_REF_NAME"
   rules:
-    - if: '$CI_COMMIT_BRANCH'
+    # 1) Allow mirror on scheduled pipelines (your daily schedule)
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: on_success
+
+    # 2) Or when you explicitly set MIRROR_ONLY=true (e.g. manual run from UI)
+    - if: '$MIRROR_ONLY == "true"'
+      when: on_success
+
+    # 3) Normal pipelines: mirror on tags and branches (keeps your current behavior)
     - if: '$CI_COMMIT_TAG'
       when: on_success
+    - if: '$CI_COMMIT_BRANCH'
+      when: on_success
+
+    # Fallback: never
+    - when: never
 
