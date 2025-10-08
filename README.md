@@ -25,8 +25,9 @@ This project demonstrates:
 
 # gitlabby
 
-[![pipeline status](/root/gitlabby/badges/main/pipeline.svg)](/root/gitlabby/-/pipelines?ref=main)
-[![quality gate](http://localhost:9000/api/project_badges/measure?project=gitlabby&metric=alert_status)](http://localhost:9000/dashboard?id=gitlabby)
+[![Pipeline Status](/root/gitlabby/badges/main/pipeline.svg)](/root/gitlabby/-/pipelines?ref=main)
+[![Quality Gate](http://localhost:9000/api/project_badges/measure?project=gitlabby&metric=alert_status)](http://localhost:9000/dashboard?id=gitlabby)
+
 
 
 
