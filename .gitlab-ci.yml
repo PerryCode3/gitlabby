@@ -51,7 +51,7 @@ mirror_to_github:
   stage: mirror
   image:
     name: alpine/git:latest
-    entrypoint: [""]          # <-- IMPORTANT: use /bin/sh as the shell
+    entrypoint: [""]
   tags: [docker, local]
   script:
     - git config --global user.name  "GitLab CI Mirror"
@@ -59,9 +59,13 @@ mirror_to_github:
     - git remote remove github || true
     - git remote add github "https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git"
     - git fetch --all --prune
-    - git push --follow-tags github "${CI_COMMIT_REF_NAME}"
+    # Force-create a local branch matching the CI one (in detached mode)
+    - git branch -f "$CI_COMMIT_REF_NAME" "$CI_COMMIT_SHA"
+    - git checkout "$CI_COMMIT_REF_NAME"
+    - git push --follow-tags github "$CI_COMMIT_REF_NAME"
   rules:
     - if: '$CI_COMMIT_BRANCH'
+      when: on_success
     - if: '$CI_COMMIT_TAG'
-
+      when: on_success
 
