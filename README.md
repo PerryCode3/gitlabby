@@ -25,8 +25,9 @@ This project demonstrates:
 
 # gitlabby
 
-![GitLab Pipeline](https://img.shields.io/badge/pipeline-passed-brightgreen?logo=gitlab)
-![Quality Gate](https://img.shields.io/badge/quality%20gate-passed-brightgreen?logo=sonarqube)
+[![Pipeline Status](http://gitlab.local/root/gitlabby/badges/main/pipeline.svg)](http://gitlab.local/root/gitlabby/-/pipelines?ref=main)
+[![Quality Gate](http://localhost:9000/api/project_badges/measure?project=gitlabby&metric=alert_status)](http://localhost:9000/dashboard?id=gitlabby)
+
 
 
 
