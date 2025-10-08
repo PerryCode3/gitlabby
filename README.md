@@ -25,19 +25,22 @@ This project demonstrates:
 
 ---
 
-## 📊 Quality & Metrics
+## 🖇️ Architecture Flow
 
-[![Quality Gate](http://host.docker.internal:9000/api/project_badges/measure?project=gitlabby&metric=alert_status)](http://host.docker.internal:9000/dashboard?id=gitlabby)
-[![Bugs](http://host.docker.internal:9000/api/project_badges/measure?project=gitlabby&metric=bugs)](http://host.docker.internal:9000/dashboard?id=gitlabby)
-[![Vulnerabilities](http://host.docker.internal:9000/api/project_badges/measure?project=gitlabby&metric=vulnerabilities)](http://host.docker.internal:9000/dashboard?id=gitlabby)
-[![Code Smells](http://host.docker.internal:9000/api/project_badges/measure?project=gitlabby&metric=code_smells)](http://host.docker.internal:9000/dashboard?id=gitlabby)
+```mermaid
+flowchart TD
+    subgraph DevEnv[Local Dev Environment]
+        A[Developer 🧑‍💻] -->|Push Code| B[GitLab 🦊]
+    end
 
-> **SonarQube Quality Gate:** Passing ✅ — Your code is clean, green, and mean.
+    subgraph GitLabCI[GitLab CI/CD Pipeline]
+        B -->|Triggers| C[GitLab Runner 🏃‍♂️]
+        C -->|Runs Jobs| D[Docker 🐳]
+        D -->|Executes sonar-scanner| E[SonarQube 🔍]
+    end
 
----
+    subgraph Sonar[SonarQube Server]
+        E -->|Saves Results| F[(Quality Gate ✅ / ❌)]
+    end
 
-## ⚙️ Getting Started
-
-### 🐋 1. Run GitLab locally
-```bash
-docker-compose up -d gitlab
+    F -->|Feedback| B
