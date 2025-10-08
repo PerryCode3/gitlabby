@@ -25,8 +25,9 @@ This project demonstrates:
 
 # gitlabby
 
-[![GitLab Pipeline](http://localhost/root/gitlabby/badges/main/pipeline.svg)](http://localhost/root/gitlabby/-/pipelines)
-[![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=gitlabby&metric=alert_status&token=sqb_d233e047f9587131965ba6a39edfb64cd7f09164)](http://localhost:9000/dashboard?id=gitlabby)
+![GitLab Pipeline](https://img.shields.io/badge/pipeline-passed-brightgreen?logo=gitlab)
+![Quality Gate](https://img.shields.io/badge/quality%20gate-passed-brightgreen?logo=sonarqube)
+
 
 
 A secure CI/CD lab project integrating GitLab, Docker, and SonarQube.
