@@ -49,9 +49,10 @@ sonar_scan:
 # ---- Mirror to GitHub (auto) ----
 mirror_to_github:
   stage: mirror
-  image: alpine/git:latest
-  tags: [docker, local]          # <— add this line
-  needs: ["sonar_scan"]          # if you use sonar; otherwise remove
+  image:
+    name: alpine/git:latest
+    entrypoint: [""]          # <-- IMPORTANT: use /bin/sh as the shell
+  tags: [docker, local]
   script:
     - git config --global user.name  "GitLab CI Mirror"
     - git config --global user.email "ci@local.gitlab"
@@ -61,7 +62,6 @@ mirror_to_github:
     - git push --follow-tags github "${CI_COMMIT_REF_NAME}"
   rules:
     - if: '$CI_COMMIT_BRANCH'
-      when: on_success
     - if: '$CI_COMMIT_TAG'
-      when: on_success
+
 
