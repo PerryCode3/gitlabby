@@ -1,0 +1,10 @@
+stages:
+  - verify
+
+verify_runner:
+  stage: verify
+  tags: [docker, local]
+  script:
+    - echo "🔥 Hello from your GitLab Runner!"
+    - docker version
+    - echo "✅ Pipeline ran successfully!"
