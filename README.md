@@ -23,7 +23,7 @@ This project demonstrates:
 | 🔍 **Analyze** | Scan code quality and security with SonarQube. |
 | 🚢 **Deploy** | (Coming soon!) Deploy to containerized or cloud environments. |
 
-# gitlabby
+# ✅ gitlabby Pipeline & Quality Checks
 
 [![Pipeline Status](https://img.shields.io/badge/pipeline-passed-brightgreen?style=for-the-badge&logo=gitlab)](http://localhost/root/gitlabby/-/pipelines)
 [![Quality Gate](https://img.shields.io/badge/quality--gate-passed-brightgreen?style=for-the-badge&logo=sonarqube)](http://localhost:9000/dashboard?id=gitlabby)
