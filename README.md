@@ -1,5 +1,5 @@
 # 🧠 gitlabby  
-*A cozy CI/CD playground built for learning, testing, and leveling up DevOps workflows.*
+*CI/CD playground built for learning, testing, and leveling up DevOps workflows.*
 
 ---
 
