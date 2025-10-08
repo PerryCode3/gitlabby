@@ -1,7 +1,14 @@
-stages: [verify, build]
+stages:
+  - verify
+  - build
+  - analyze
+  - mirror
 
+# Keep talking to the host Docker (your runner is mounting the socket)
 variables:
   DOCKER_HOST: "unix:///var/run/docker.sock"
+  # Optional: full history helps some tools
+  GIT_DEPTH: "0"
 
 verify_runner:
   stage: verify
@@ -18,3 +25,44 @@ build_hello_image:
     - echo 'CMD ["sh","-lc","echo Hello from GitLab CI!"]' >> Dockerfile
     - docker build -t hello-gitlab-ci:local .
     - docker run --rm hello-gitlab-ci:local
+
+# ---- SonarQube analysis (optional but recommended) ----
+sonar_scan:
+  stage: analyze
+  image: sonarsource/sonar-scanner-cli:latest
+  tags: [docker, local]
+  variables:
+    SONAR_USER_HOME: "$CI_PROJECT_DIR/.sonar"
+  cache:
+    key: "$CI_PROJECT_NAME-sonar"
+    paths: [".sonar/cache"]
+  script:
+    - sonar-scanner
+      -Dsonar.projectKey=gitlabby
+      -Dsonar.projectName="gitlabby"
+      -Dsonar.host.url=$SONAR_HOST_URL
+      -Dsonar.token=$SONAR_TOKEN
+      -Dsonar.qualitygate.wait=true
+  rules:
+    - if: '$CI_COMMIT_BRANCH'   # run on branches; tweak if you only want main
+
+# ---- Mirror to GitHub (auto) ----
+mirror_to_github:
+  stage: mirror
+  image: alpine/git:latest
+  # If you want this to wait until sonar passes:
+  needs: ["sonar_scan"]
+  script:
+    - git config --global user.name  "GitLab CI Mirror"
+    - git config --global user.email "ci@local.gitlab"
+    - git remote remove github || true
+    - git remote add github "https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git"
+    - git fetch --all --prune
+    - git push --follow-tags github "${CI_COMMIT_REF_NAME}"
+  rules:
+    # Mirror branch pushes; change to == "main" if you only want main
+    - if: '$CI_COMMIT_BRANCH'
+      when: on_success
+    # Also mirror tags
+    - if: '$CI_COMMIT_TAG'
+      when: on_success
